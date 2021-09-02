@@ -1,0 +1,43 @@
+.container_register{
+    text-align: center;
+    /* margin: auto; */
+}
+
+.form_register{
+    background-color: rgba(2, 2, 19, 0.795);    
+    width: 350px;
+    /* height: 400px; */
+    margin: auto;
+    border: solid 1px;
+}
+
+.input_form{
+    display: flex;
+    margin: auto;
+    width: 250px;
+    height: 30px;
+    /* margin-top: 5px; */
+    margin-bottom: 5px;
+}
+
+.title_input{
+
+    margin-left: 45px;
+    display: flex;
+    /* text-align: left; */
+}
+
+.err{
+    text-align: left;
+    color: rgba(255, 51, 0, 0.774);
+    margin-top: -15px;
+    /* margin-bottom: -15px; */
+}
+
+.button_register{
+    margin: auto;
+    margin-top: 35px;
+    border: solid 1px;
+    background-color: rgba(23, 23, 49, 0.349);
+    color: rgb(238, 227, 227);
+}

@@ -15,10 +15,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    age: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     userName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,6 +22,7 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
   });
 };
