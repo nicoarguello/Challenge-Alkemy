@@ -53,14 +53,14 @@ const Budget = () => {
   
     return (
       <div className="container_register">
-        <h1>Register</h1>
+        <h1>Budget</h1>
         <form
           className="form_register"
           onSubmit={handleSubmit(onSubmit)}
           onChange={(e) => ChangeInput(e)}
         >
           <div>
-            <h4 className="title_input">Name</h4>
+            <h4 className="title_input">Date</h4>
             <input
               className="input_form"
               name="date"
@@ -72,30 +72,21 @@ const Budget = () => {
                 },
               })}
             />
-            <span className="err">{errors?.date?.message}</span>
-            <h4 className="title_input">Description</h4>
-            <input
-              className="input_form"
-              name="description"
-              type="text"
-              {...register("description", {
-                required: {
-                  value: true,
-                  message: "Description is required",
-                },
-              })}
-            />
-            <span className="err">{errors?.description?.message}</span>
+            <span className="err" aria-live="polite">{errors?.date?.message}</span>
+            
             <h4 className="title_input">Amount</h4>
             <input
               className="input_form"
               name="amount"
-              type="text"
+              type="cc-type"
               onChange={ChangeInput}
+              required
+              aria-required="true"
+              message="ddddddddddddddd"
               {...register("amount", {
                 required: {
                   value: true,
-                  message: "Email is required",
+                  message: "Amount is required",
                 },
               })}
             />
@@ -112,13 +103,30 @@ const Budget = () => {
               {...register("userName", {
                 required: {
                   value: true,
-                  message: "User Name is required",
+                  message: "You must select an option",
                 },
               })}
-            ></select>
+            >
+                <option></option>
+                <option>Entry</option>
+                <option>Egress</option>
+            </select>
             
             <span className="err">{errors?.userName?.message}</span>
             
+            <h4 className="title_input">Description</h4>
+            <input
+              className="input_form"
+              name="description"
+              type="text"
+              {...register("description", {
+                required: {
+                  value: true,
+                  message: "Description is required",
+                },
+              })}
+            />
+            <span className="err">{errors?.description?.message}</span>
             
           </div>
           <button type="submit" className="button_register">

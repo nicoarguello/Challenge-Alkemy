@@ -92,8 +92,9 @@ const Register = () => {
           <input
             className="input_form"
             name="email"
-            type="text"
+            type="email"
             onChange={ChangeInput}
+            required
             {...register("email", {
               required: {
                 value: true,
