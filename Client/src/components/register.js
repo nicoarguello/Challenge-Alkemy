@@ -11,38 +11,33 @@ const Register = () => {
     dispatch(findUsers());
   }, [dispatch]);
 
-  const [error, setError] = useState({
-    status_email: false,
-    status_userName: false,
-  });
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
 
   const users = useSelector((store) => store.users);
-  console.log(users)
+  // console.log(users);
 
   const ChangeInput = (e) => {
-    const value = e.target.value;
-    const name = e.target.name;
+    var value = e.target.value;
+    // const name = e.target.name;
+    
 
     for (let i = 0; i < users.length; i++) {
       if (value === users[i].email) {
-        setError({
-          status_email: true,
-        });
-      } else {
-        setError({
-          status_email: false,
-        });
+         return setEmail('true');
+      } 
+      if (value !== users[i].email) {
+        setEmail('');
       }
       if (value === users[i].userName) {
-        setError({
-          status_userName: true,
-        });
-      } else {
-        setError({
-          status_userName: false,
-        });
+       return  setUserName('true');
+      } 
+      if (value !== users[i].userName) {
+        return setUserName('');
       }
     }
+    // console.log(error)
+    dispatch(findUsers());
   };
 
   const {
@@ -97,7 +92,7 @@ const Register = () => {
           <input
             className="input_form"
             name="email"
-            type="email"
+            type="text"
             onChange={ChangeInput}
             {...register("email", {
               required: {
@@ -107,7 +102,7 @@ const Register = () => {
             })}
           />
           <span className="err">
-            {error.status_email && "The email has already been registered"}
+            {email && email.length > 0 ? "The email has already been registered" : '' }
           </span>
           <span className="err">{errors?.email?.message}</span>
 
@@ -126,7 +121,7 @@ const Register = () => {
             })}
           />
           <span className="err">
-            {error.status_userName && "Username is already in use"}
+            {userName && "Username is already in use"}
           </span>
           <span className="err">{errors?.userName?.message}</span>
           <h4 className="title_input">Password</h4>
