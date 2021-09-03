@@ -17,6 +17,17 @@ async function addUsers(req, res, next) {
   }
 }
 
+async function findUsers(req, res, next) {
+  try {
+    
+    let users = await Users.findAll();
+    res.send(users);
+  } catch (error) {
+    res.status(500).send({ message: "An error occurred" });
+  }
+}
+
 module.exports = {
   addUsers,
+  findUsers,
 };
