@@ -1,6 +1,5 @@
 import axios from "axios";
 
-export const ADD_USERS = 'ADD_USERS'
 export const GET_USERS = 'GET_USERS'
 
 export function addUsers(input) {
@@ -20,3 +19,10 @@ export function addUsers(input) {
     });
     };
   }  
+
+  export function addBudget(input) {
+    return function () {
+      axios.post(`http://localhost:3001/addBudget`, input).then((r) => {
+        });
+    };
+  }

@@ -42,8 +42,8 @@ const { Users, Budget } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Users.hasOne(Budget, {foreignKey: 'userName'} );
-Budget.belongsTo(Users)
+Users.hasOne(Budget, {foreignKey: 'userId'} );
+Budget.belongsTo(Users, {foreignKey: 'userId'} )
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

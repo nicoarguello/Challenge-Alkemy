@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { addBudget } from "../redux/actions";
 
 const Budget = () => {
     const dispatch = useDispatch();
   
-    useEffect(() => {
-    //   dispatch(findUsers());
-    }, [dispatch]);
+    // useEffect(() => {
+    // //   dispatch(findUsers());
+    // }, [dispatch]);
   
     // const [email, setEmail] = useState('');
     // const [userName, setUserName] = useState('');
@@ -46,7 +47,8 @@ const Budget = () => {
     } = useForm();
   
     const onSubmit = (data, e) => {
-    //   dispatch(addUsers(data));
+        console.log(data)
+      dispatch(addBudget(data));
       e.target.reset();
       reset({ data });
     };
@@ -79,10 +81,10 @@ const Budget = () => {
               className="input_form"
               name="amount"
               type="cc-type"
-              onChange={ChangeInput}
-              required
-              aria-required="true"
-              message="ddddddddddddddd"
+            //   onChange={ChangeInput}
+            //   required
+            //   aria-required="true"
+            //   message="ddddddddddddddd"
               {...register("amount", {
                 required: {
                   value: true,
@@ -96,11 +98,11 @@ const Budget = () => {
             <h4 className="title_input">Type</h4>
             <select
               className="input_form"
-              name="userName"
+              name="type"
               type="text"
               autoComplete="off"
-              onChange={ChangeInput}
-              {...register("userName", {
+            //   onChange={ChangeInput}
+              {...register("type", {
                 required: {
                   value: true,
                   message: "You must select an option",
@@ -112,7 +114,7 @@ const Budget = () => {
                 <option>Egress</option>
             </select>
             
-            <span className="err">{errors?.userName?.message}</span>
+            <span className="err">{errors?.type?.message}</span>
             
             <h4 className="title_input">Description</h4>
             <input
@@ -130,7 +132,7 @@ const Budget = () => {
             
           </div>
           <button type="submit" className="button_register">
-            Subscribe
+            Submit
           </button>
         </form>
       </div>
