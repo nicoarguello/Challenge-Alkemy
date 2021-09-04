@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { addBudget } from "../redux/actions";
+import { login } from "../redux/actions";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -48,14 +48,14 @@ const Login = () => {
   
     const onSubmit = (data, e) => {
         console.log(data)
-      dispatch(addBudget(data));
+      dispatch(login(data));
       e.target.reset();
       reset({ data });
     };
   
     return (
       <div className="container_register">
-        <h1>Budget</h1>
+        <h1>Login</h1>
         <form
           className="form_register"
           onSubmit={handleSubmit(onSubmit)}

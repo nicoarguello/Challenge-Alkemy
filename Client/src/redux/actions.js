@@ -26,3 +26,11 @@ export function addUsers(input) {
         });
     };
   }
+
+  export function login(input) {
+    return function () {
+      axios.post(`http://localhost:3001/login`, input).then((r) => {
+        console.log(r.data)
+        });
+    };
+  }
