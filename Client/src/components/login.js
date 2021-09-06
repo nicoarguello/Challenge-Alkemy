@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { login, findUsers } from "../redux/actions";
+import { useHistory } from "react-router-dom";
+import { login, findUsers, findOneUser } from "../redux/actions";
 import swal from "sweetalert";
 
 const Login = () => {
@@ -16,8 +17,10 @@ const Login = () => {
     password: "",
   });
 
+  let history = useHistory();
+
   const users = useSelector((store) => store.users);
-  // console.log(s_login.status);
+  var state_login = useSelector((store) => store.state_login);
 
   const ChangeInput = (e) => {
     const value = e.target.value;
@@ -50,17 +53,23 @@ const Login = () => {
         users[i].email === user.email &&
         users[i].password === user.password
       ) {
-        dispatch(login(data))
+        dispatch(login(data));
+        // history.push(`http://localhost:3000/home?${users[i].userName}`);
         swal({
           title: "Login succes",
           icon: "success",
           button: "Aceptar",
           timer: "5000",
-        }).then(()=>{
+        }).then(() => {
           e.target.reset();
           reset({ data });
-          window.location.replace("http://localhost:3000/home")
-        })
+          state_login = users[i].userName
+          
+          window.location.replace(
+            `http://localhost:3000/${users[i].userName}`
+            );
+            dispatch(findOneUser(users[i].userName))
+        });
       } else {
         swal({
           title: "Wrong username or password",
@@ -70,23 +79,6 @@ const Login = () => {
         });
       }
     }
-
-    // dispatch(login(data))
-    // console.log(user);
-    // swal({
-    //   title: "Los datos se modificaron con éxito!",
-    //   icon: "success",
-    //   button: "Aceptar",
-    //   timer: "5000",
-    // });
-    // .then((r) => dispatch(getPais()));
-    // if(s_login) {
-    //   console.log(s_login)
-    // } else {
-    //   console.log('ERRRROOOOOOOR')
-    // }
-    // e.target.reset();
-    // reset({ data });
   };
 
   return (

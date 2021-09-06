@@ -27,7 +27,23 @@ async function findUsers(req, res, next) {
   }
 }
 
+async function findUser(req, res, next) {
+  try {
+    const { userName } = req.query;
+
+    let user = await Users.findOne({
+      where: {
+          userName
+      }
+    });
+    res.send(user);
+  } catch (error) {
+    res.status(500).send({ message: "An error occurred" });
+  }
+}
+
 module.exports = {
   addUsers,
   findUsers,
+  findUser
 };

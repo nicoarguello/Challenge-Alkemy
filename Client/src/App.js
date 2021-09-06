@@ -11,9 +11,11 @@ function App() {
     <React.Fragment>
     <Route path="/register" exact component={Register} />
     <Route path="/home" exact component={Home} />
-    <Login />
+    <Route path="/login" exact component={Login} />
+    <Route path="/Budget" exact component={Budget} />
+    {/* <Login />
     <Budget/>
-    <Register/>
+    <Register/> */}
   </React.Fragment>
   );
 }

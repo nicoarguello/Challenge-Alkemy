@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const Home = () => {
+const Home = (props) => {
 
+console.log(props, props.location.search)
 
     return (
         <div>

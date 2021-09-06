@@ -1,8 +1,9 @@
-import { GET_USERS, LOGIN } from "./actions";
+import { GET_USERS, LOGIN, FIND_ONE_USER } from "./actions";
 
 const inicialState = {
   users: [],
-  state_login: {},
+  state_login: [],
+  user: {},
 };
 
 function rootReducer(state = inicialState, action) {
@@ -16,6 +17,11 @@ function rootReducer(state = inicialState, action) {
       return {
         ...state,
         state_login: action.payload,
+      };
+    case FIND_ONE_USER:
+      return {
+        ...state,
+        user: action.payload,
       };
     default:
       return state;
