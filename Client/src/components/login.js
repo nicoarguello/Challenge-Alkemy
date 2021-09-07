@@ -18,6 +18,7 @@ const Login = () => {
   });
 
   let history = useHistory();
+  console.log(history)
 
   const users = useSelector((store) => store.users);
   var state_login = useSelector((store) => store.state_login);
@@ -54,7 +55,7 @@ const Login = () => {
         users[i].password === user.password
       ) {
         dispatch(login(data));
-        // history.push(`http://localhost:3000/home?${users[i].userName}`);
+        history.push(`./${users[i].userName}`);
         swal({
           title: "Login succes",
           icon: "success",
@@ -66,7 +67,7 @@ const Login = () => {
           state_login = users[i].userName
           
           window.location.replace(
-            `http://localhost:3000/${users[i].userName}`
+            `./${users[i].userName}`, history.push(`./${users[i].userName}`)
             );
             dispatch(findOneUser(users[i].userName))
         });
