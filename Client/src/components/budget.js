@@ -5,7 +5,7 @@ import { addBudget } from "../redux/actions";
 
 const Budget = () => {
     const dispatch = useDispatch();
-  
+    const user = useSelector((store) => store.user);
     // useEffect(() => {
     // //   dispatch(findUsers());
     // }, [dispatch]);
@@ -47,8 +47,12 @@ const Budget = () => {
     } = useForm();
   
     const onSubmit = (data, e) => {
-        console.log(data)
-      dispatch(addBudget(data));
+      let budget = {
+        ...data,
+        userId: user.id
+      }
+      console.log(budget)
+      dispatch(addBudget(budget));
       e.target.reset();
       reset({ data });
     };
