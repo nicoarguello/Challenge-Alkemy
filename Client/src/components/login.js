@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { login, findUsers, findOneUser } from "../redux/actions";
+import { login, findUsers, findOneUser, findBudget } from "../redux/actions";
 import swal from "sweetalert";
 
 const Login = () => {
@@ -18,10 +18,8 @@ const Login = () => {
   });
 
   let history = useHistory();
-  console.log(history)
 
   const users = useSelector((store) => store.users);
-  var state_login = useSelector((store) => store.state_login);
 
   const ChangeInput = (e) => {
     const value = e.target.value;
@@ -54,22 +52,18 @@ const Login = () => {
         users[i].email === user.email &&
         users[i].password === user.password
       ) {
-        dispatch(login(data));
-        history.push(`./${users[i].userName}`);
-        swal({
+        return swal({
           title: "Login succes",
           icon: "success",
           button: "Aceptar",
           timer: "5000",
         }).then(() => {
+          dispatch(findOneUser(users[i].userName));
+          dispatch(login(data));
           e.target.reset();
           reset({ data });
-          state_login = users[i].userName
-          
-          window.location.replace(
-            `./${users[i].userName}`, history.push(`./${users[i].userName}`)
-            );
-            dispatch(findOneUser(users[i].userName))
+
+          history.push(`./home/${users[i].userName}`);
         });
       } else {
         swal({
