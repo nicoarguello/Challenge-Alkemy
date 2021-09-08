@@ -10,7 +10,7 @@ function App() {
   return (
     <React.Fragment>
     <Route path="/register" exact component={Register} />
-    <Route path="/home" exact component={Home} />
+    <Route path="/home" component={Home} />
     <Route path="/login" exact component={Login} />
     <Route path="/budget" exact component={Budget} />
     {/* <Login />
