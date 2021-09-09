@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { addBudget } from "../redux/actions";
+import { addBudget, findBudget } from "../redux/actions";
 
 const Budget = () => {
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
-    // useEffect(() => {
-    // //   dispatch(findUsers());
-    // }, [dispatch]);
+    useEffect(() => {
+      dispatch(findBudget(user.id));
+    }, [dispatch]);
   
     // const [email, setEmail] = useState('');
     // const [userName, setUserName] = useState('');
@@ -51,8 +51,9 @@ const Budget = () => {
         ...data,
         userId: user.id
       }
-      console.log(budget)
+      // console.log(budget)
       dispatch(addBudget(budget));
+      dispatch(findBudget(user.id))
       e.target.reset();
       reset({ data });
     };
