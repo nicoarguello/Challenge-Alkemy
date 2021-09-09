@@ -59,6 +59,7 @@ const Login = () => {
           timer: "5000",
         }).then(() => {
           dispatch(findOneUser(users[i].userName));
+          dispatch(findBudget(users[i].id))
           dispatch(login(data));
           e.target.reset();
           reset({ data });
