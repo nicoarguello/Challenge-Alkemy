@@ -3,22 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { findBudget } from "../redux/actions";
 import DataTable, { createTheme, Alignment } from "react-data-table-component";
 import Budget from "./budget";
+import { Link } from "react-router-dom";
+import "../styles/home.css";
 
 const Home = () => {
+  const [login, setLogin] = useState(true);
+  
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-
+  const simbol = "$";
   const budget = useSelector((store) => store.budget);
-  //  console.log(budget)
-  // if (budget.length > 0){
-  //   for(let i=0; i < budget.date.length; i++) {
-  //     budget.date[i]
-  //   }
-  // }
+
   useEffect(() => {
-    dispatch(findBudget(user.id));
+    user.id && dispatch(findBudget(user.id));
   }, []);
-  
 
   createTheme("solarized", {
     text: {
@@ -43,77 +41,103 @@ const Home = () => {
   });
 
   const [columns, setColumns] = useState([]);
-  const [pending, setPending] = React.useState(true);
-  
+  const [pending, setPending] = useState(true);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {     
+      setLogin(false);
+    }, 2000);
+    return () => clearTimeout(timeout);
+  }, [])
   useEffect(() => {
     const timeout = setTimeout(() => {
       setColumns([
-      
+        {
+          id: 1,
+          name: "DATE",
+          selector: (row) => row.date,
+          sortable: true,
+          reorder: true,
+          // center: true,
+        },
         {
           id: 2,
+          name: "AMOUNT",
+          cell: (row) =>
+            row.type === "Entry" ? (
+              <div style={{ width: 90 }}>
+                {simbol} {row.amount}
+              </div>
+            ) : (
+              <div style={{ color: "red", width: 90 }}>
+                {simbol} {row.amount}
+              </div>
+            ),
+          sortable: true,
+          reorder: true,
+          // center: true,
+        },
+        {
+          id: 3,
           name: "TYPE",
           selector: (row) => row.type,
           sortable: true,
           reorder: true,
         },
         {
-          id: 3,
-          name: "AMOUNT",
-          selector: (row) =>'$  ' + row.amount,
-          sortable: true,
-          reorder: true,
-          // right: true,
-        },
-        {
           id: 4,
-          name: "DATE",
-          selector: (row) => row.date,
-          sortable: true,
-          reorder: true,
-          
-        },
-        {
-          id: 5,
           name: "DESCRIPTION",
-          selector: (row) => row.description,
+          cell: (row) => row.description,
           sortable: true,
           reorder: true,
         },
       ]);
       setPending(false);
-      
     }, 2000);
     return () => clearTimeout(timeout);
   }, []);
   return (
-    <div>
+    <div className="homeContainer">
       {user.name && user.name.length > 0 ? (
         <div>
-          <h1>Welcome {user.name}</h1>
+          <Link to="/" className="link_login">
+            Logout
+          </Link>
+          <div>
+            <h2>Welcome {user.name}</h2>
 
-          <DataTable
-            title="Virtual wallet control"
-            columns={columns}
-            data={budget}
-            defaultSortFieldId={1}
-            pagination
-            selectableRows
-            highlightOnHover
-            fixedHeader
-            theme="solarized"
-            progressPending={pending}
-            
-            
-            // className="container_register"
-            // subHeaderAlign={Alignment.Center}
-            // subHeader={Alignment.Center}
-          />
+            <DataTable
+              title="Virtual wallet control"
+              columns={columns}
+              data={budget}
+              defaultSortFieldId={1}
+              pagination
+              selectableRows
+              highlightOnHover
+              responsive
+              fixedHeader
+              theme="solarized"
+              progressPending={pending}
+              className="datatable"
+              // style={{width:90}}
+              // subHeaderAlign={Alignment.Center}
+              // subHeader={Alignment.Center}
+            />
 
-         <Budget />
+            <Budget />
+          </div>
         </div>
       ) : (
-        <h1>EROR</h1>
+        <div className='user_failed_container'>
+        <h2 className='user_failed'>
+          You do not have access to this site. Login with your username {" "}
+          <Link to="/login" className="link_login">
+            HERE
+          </Link>
+          . If you do not have a user, you can complete the  
+          <Link to="/register" className="link_login">Registration</Link>
+        </h2>
+        </div>
       )}
     </div>
   );
