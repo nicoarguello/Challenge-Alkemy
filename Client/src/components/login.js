@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { login, findUsers, findOneUser, findBudget } from "../redux/actions";
 import swal from "sweetalert";
 
@@ -47,6 +47,14 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data, e) => {
+    if (users.length === 0) {
+      return swal({
+        title: "You must be register",
+        icon: "error",
+        button: "Aceptar",
+        timer: "5000",
+      });
+    }
     for (let i = 0; i < users.length; i++) {
       if (
         users[i].email === user.email &&
@@ -59,7 +67,7 @@ const Login = () => {
           timer: "5000",
         }).then(() => {
           dispatch(findOneUser(users[i].userName));
-          dispatch(findBudget(users[i].id))
+          dispatch(findBudget(users[i].id));
           dispatch(login(data));
           e.target.reset();
           reset({ data });
@@ -120,6 +128,9 @@ const Login = () => {
           Submit
         </button>
       </form>
+      <button>
+        <Link to="/register">Register</Link>
+      </button>
     </div>
   );
 };
