@@ -4,9 +4,11 @@
 }
 
 .form_register{
-    background-color: rgba(2, 2, 19, 0.795);    
+    background-color: rgba(7, 7, 110, 0.795);    
     width: 350px;
     /* height: 400px; */
+    padding: auto;
+    padding-bottom: 10px;
     margin: auto;
     border: solid 1px;
 }
@@ -16,6 +18,14 @@
     margin: auto;
     width: 250px;
     height: 30px;
+    /* margin-top: 5px; */
+    margin-bottom: 5px;
+}
+.input_form_select{
+    display: flex;
+    margin: auto;
+    width: 258px;
+    height: 35px;
     /* margin-top: 5px; */
     margin-bottom: 5px;
 }
@@ -35,9 +45,23 @@
 }
 
 .button_register{
+    width: 70px;
     margin: auto;
     margin-top: 35px;
     border: solid 1px;
-    background-color: rgba(23, 23, 49, 0.349);
-    color: rgb(238, 227, 227);
+    background-color: rgba(216, 216, 230, 0.349);
+    color: rgb(8, 1, 1);
+}
+.button_register:hover{
+background-color: rgba(5, 5, 36, 0.349);
+color: rgb(238, 227, 227);
+}
+.register_text {
+    margin: auto;
+    margin-top: 20px;
+    color: cornsilk;
+}
+
+.link_login{
+    color: crimson;
 }
