@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import "../styles/register.css";
 import { addUsers, findUsers } from "../redux/actions";
+import { Link } from "react-router-dom";
+import "../styles/register.css";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -11,8 +12,8 @@ const Register = () => {
     dispatch(findUsers());
   }, [dispatch]);
 
-  const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
 
   const users = useSelector((store) => store.users);
   // console.log(users);
@@ -20,20 +21,19 @@ const Register = () => {
   const ChangeInput = (e) => {
     var value = e.target.value;
     // const name = e.target.name;
-    
 
     for (let i = 0; i < users.length; i++) {
       if (value === users[i].email) {
-         return setEmail('true');
-      } 
+        return setEmail("true");
+      }
       if (value !== users[i].email) {
-        setEmail('');
+        setEmail("");
       }
       if (value === users[i].userName) {
-       return  setUserName('true');
-      } 
+        return setUserName("true");
+      }
       if (value !== users[i].userName) {
-        return setUserName('');
+        return setUserName("");
       }
     }
     // console.log(error)
@@ -103,7 +103,9 @@ const Register = () => {
             })}
           />
           <span className="err">
-            {email && email.length > 0 ? "The email has already been registered" : '' }
+            {email && email.length > 0
+              ? "The email has already been registered"
+              : ""}
           </span>
           <span className="err">{errors?.email?.message}</span>
 
@@ -143,6 +145,12 @@ const Register = () => {
           Subscribe
         </button>
       </form>
+      <p className="register_text">
+        If you are already registered, enter{" "}
+        <Link to="/login" className="link_login">
+          HERE
+        </Link>
+      </p>
     </div>
   );
 };
