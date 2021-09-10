@@ -5,10 +5,12 @@ import Register from './components/register'
 import Home from "./components/home"
 import Budget from './components/budget';
 import Login from './components/login';
+import Landing from './components/landing'
 
 function App() {
   return (
     <React.Fragment>
+    <Route path="/" exact component={Landing} />
     <Route path="/register" exact component={Register} />
     <Route path="/home" component={Home} />
     <Route path="/login" exact component={Login} />
